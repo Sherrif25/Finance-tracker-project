@@ -15,9 +15,9 @@ const spendingData = [
 ]
 
 const savingsGoals = [
-  { name: "Emergency Fund", current: 2500, target: 5000, progress: 50 },
-  { name: "Vacation", current: 800, target: 2000, progress: 40 },
-  { name: "New Laptop", current: 450, target: 1200, progress: 38 },
+  { name: "Emergency Fund", current: 250000, target: 500000, progress: 50 },
+  { name: "Vacation", current: 80000, target: 200000, progress: 40 },
+  { name: "New Laptop", current: 45000, target: 120000, progress: 38 },
 ]
 
 export function DashboardScreen() {
@@ -42,7 +42,7 @@ export function DashboardScreen() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-green-100 text-sm">Total Income</p>
-                <p className="text-2xl font-bold">$4,250</p>
+                <p className="text-2xl font-bold">KSh 425,000</p>
               </div>
               <TrendingUp className="h-8 w-8 text-green-100" />
             </div>
@@ -55,7 +55,7 @@ export function DashboardScreen() {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-red-100 text-sm">Expenses</p>
-                  <p className="text-xl font-bold">$2,890</p>
+                  <p className="text-xl font-bold">KSh 289,000</p>
                 </div>
                 <TrendingDown className="h-6 w-6 text-red-100" />
               </div>
@@ -67,7 +67,7 @@ export function DashboardScreen() {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-blue-100 text-sm">Balance</p>
-                  <p className="text-xl font-bold">$1,360</p>
+                  <p className="text-xl font-bold">KSh 136,000</p>
                 </div>
                 <Wallet className="h-6 w-6 text-blue-100" />
               </div>
@@ -134,8 +134,8 @@ export function DashboardScreen() {
               </div>
               <Progress value={goal.progress} className="h-2" />
               <div className="flex justify-between text-sm text-gray-500">
-                <span>${goal.current.toLocaleString()}</span>
-                <span>${goal.target.toLocaleString()}</span>
+                <span>KSh {goal.current.toLocaleString()}</span>
+                <span>KSh {goal.target.toLocaleString()}</span>
               </div>
             </div>
           ))}

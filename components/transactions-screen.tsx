@@ -18,7 +18,7 @@ const mockTransactions = [
     date: "2024-01-15",
     description: "Grocery Shopping",
     category: "Food",
-    amount: -85.5,
+    amount: -8550,
     type: "expense",
     method: "Card",
   },
@@ -27,7 +27,7 @@ const mockTransactions = [
     date: "2024-01-14",
     description: "Salary",
     category: "Salary",
-    amount: 2500.0,
+    amount: 250000,
     type: "income",
     method: "Bank",
   },
@@ -36,7 +36,7 @@ const mockTransactions = [
     date: "2024-01-13",
     description: "Uber Ride",
     category: "Transport",
-    amount: -12.3,
+    amount: -1230,
     type: "expense",
     method: "M-Pesa",
   },
@@ -45,7 +45,7 @@ const mockTransactions = [
     date: "2024-01-12",
     description: "Coffee Shop",
     category: "Food",
-    amount: -4.5,
+    amount: -450,
     type: "expense",
     method: "Cash",
   },
@@ -54,7 +54,7 @@ const mockTransactions = [
     date: "2024-01-11",
     description: "Freelance Work",
     category: "Income",
-    amount: 350.0,
+    amount: 35000,
     type: "income",
     method: "Bank",
   },
@@ -107,7 +107,7 @@ export function TransactionsScreen() {
               </div>
               <div className="space-y-2">
                 <Label htmlFor="amount">Amount</Label>
-                <Input id="amount" type="number" placeholder="0.00" />
+                <Input id="amount" type="number" placeholder="0" />
               </div>
             </div>
 
@@ -234,7 +234,7 @@ export function TransactionsScreen() {
               </div>
               <div className="text-right">
                 <p className={`font-bold ${transaction.type === "income" ? "text-green-600" : "text-red-600"}`}>
-                  {transaction.type === "income" ? "+" : ""}${Math.abs(transaction.amount).toFixed(2)}
+                  {transaction.type === "income" ? "+" : ""}KSh {Math.abs(transaction.amount).toLocaleString()}
                 </p>
                 <p className="text-xs text-gray-500">{transaction.date}</p>
               </div>

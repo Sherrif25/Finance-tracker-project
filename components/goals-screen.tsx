@@ -15,32 +15,32 @@ const mockGoals = [
   {
     id: 1,
     name: "Emergency Fund",
-    targetAmount: 5000,
-    savedAmount: 2500,
+    targetAmount: 500000,
+    savedAmount: 250000,
     dueDate: "2024-12-31",
     progress: 50,
   },
   {
     id: 2,
     name: "Summer Vacation",
-    targetAmount: 2000,
-    savedAmount: 800,
+    targetAmount: 200000,
+    savedAmount: 80000,
     dueDate: "2024-06-15",
     progress: 40,
   },
   {
     id: 3,
     name: "New Laptop",
-    targetAmount: 1200,
-    savedAmount: 450,
+    targetAmount: 120000,
+    savedAmount: 45000,
     dueDate: "2024-04-30",
     progress: 38,
   },
   {
     id: 4,
     name: "Car Down Payment",
-    targetAmount: 8000,
-    savedAmount: 1200,
+    targetAmount: 800000,
+    savedAmount: 120000,
     dueDate: "2024-10-01",
     progress: 15,
   },
@@ -76,11 +76,11 @@ export function GoalsScreen() {
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="targetAmount">Target Amount</Label>
-                <Input id="targetAmount" type="number" placeholder="0.00" />
+                <Input id="targetAmount" type="number" placeholder="0" />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="savedAmount">Amount Saved</Label>
-                <Input id="savedAmount" type="number" placeholder="0.00" />
+                <Input id="savedAmount" type="number" placeholder="0" />
               </div>
             </div>
 
@@ -129,7 +129,7 @@ export function GoalsScreen() {
               <div>
                 <p className="text-green-100 text-sm">Total Saved</p>
                 <p className="text-2xl font-bold">
-                  ${mockGoals.reduce((sum, goal) => sum + goal.savedAmount, 0).toLocaleString()}
+                  KSh {mockGoals.reduce((sum, goal) => sum + goal.savedAmount, 0).toLocaleString()}
                 </p>
               </div>
               <TrendingUp className="h-8 w-8 text-green-100" />
@@ -159,12 +159,12 @@ export function GoalsScreen() {
 
                 <div className="flex justify-between items-center">
                   <div className="text-sm">
-                    <span className="font-medium text-gray-700">${goal.savedAmount.toLocaleString()}</span>
+                    <span className="font-medium text-gray-700">KSh {goal.savedAmount.toLocaleString()}</span>
                     <span className="text-gray-500"> saved</span>
                   </div>
                   <div className="text-sm">
                     <span className="text-gray-500">of </span>
-                    <span className="font-medium text-gray-700">${goal.targetAmount.toLocaleString()}</span>
+                    <span className="font-medium text-gray-700">KSh {goal.targetAmount.toLocaleString()}</span>
                   </div>
                 </div>
 
