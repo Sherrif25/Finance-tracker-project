@@ -10,45 +10,55 @@ import { Calendar } from "@/components/ui/calendar"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { format } from "date-fns"
 import { CalendarIcon, Plus, Target, TrendingUp } from "lucide-react"
-
-const mockGoals = [
-  {
-    id: 1,
-    name: "Emergency Fund",
-    targetAmount: 500000,
-    savedAmount: 250000,
-    dueDate: "2024-12-31",
-    progress: 50,
-  },
-  {
-    id: 2,
-    name: "Summer Vacation",
-    targetAmount: 200000,
-    savedAmount: 80000,
-    dueDate: "2024-06-15",
-    progress: 40,
-  },
-  {
-    id: 3,
-    name: "New Laptop",
-    targetAmount: 120000,
-    savedAmount: 45000,
-    dueDate: "2024-04-30",
-    progress: 38,
-  },
-  {
-    id: 4,
-    name: "Car Down Payment",
-    targetAmount: 800000,
-    savedAmount: 120000,
-    dueDate: "2024-10-01",
-    progress: 15,
-  },
-]
+import { useAuth } from "@/app/page"
 
 export function GoalsScreen() {
+  const { user } = useAuth()
   const [showForm, setShowForm] = useState(false)
   const [dueDate, setDueDate] = useState<Date>()
+
+  const getUserGoals = (userId: string) => {
+    const userGoals: Record<string, any[]> = {
+      "1": [
+        {
+          id: 1,
+          name: "Emergency Fund",
+          targetAmount: 500000,
+          savedAmount: 250000,
+          dueDate: "2024-12-31",
+          progress: 50,
+        },
+        {
+          id: 2,
+          name: "Summer Vacation",
+          targetAmount: 200000,
+          savedAmount: 80000,
+          dueDate: "2024-06-15",
+          progress: 40,
+        },
+        {
+          id: 3,
+          name: "New Laptop",
+          targetAmount: 120000,
+          savedAmount: 45000,
+          dueDate: "2024-04-30",
+          progress: 38,
+        },
+        {
+          id: 4,
+          name: "Car Down Payment",
+          targetAmount: 800000,
+          savedAmount: 120000,
+          dueDate: "2024-10-01",
+          progress: 15,
+        },
+      ],
+    }
+
+    return userGoals[userId] || []
+  }
+
+  const mockGoals = getUserGoals(user?.id || "")
 
   return (
     <div className="p-4 space-y-6">
@@ -137,6 +147,16 @@ export function GoalsScreen() {
           </CardContent>
         </Card>
       </div>
+
+      {mockGoals.length === 0 && (
+        <Card className="border-0 shadow-lg">
+          <CardContent className="p-8 text-center">
+            <Target className="h-12 w-12 text-gray-400 mx-auto mb-4" />
+            <h3 className="text-lg font-medium text-gray-800 mb-2">No goals yet</h3>
+            <p className="text-gray-600 mb-4">Create your first financial goal to start saving.</p>
+          </CardContent>
+        </Card>
+      )}
 
       {/* Goals List */}
       <div className="space-y-4">

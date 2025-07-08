@@ -10,61 +10,71 @@ import { Badge } from "@/components/ui/badge"
 import { Calendar } from "@/components/ui/calendar"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { format } from "date-fns"
-import { CalendarIcon, Plus, Filter, ArrowUpCircle, ArrowDownCircle } from "lucide-react"
+import { CalendarIcon, Plus, Filter, ArrowUpCircle, ArrowDownCircle, CreditCard } from "lucide-react"
+import { useAuth } from "@/app/page"
 
-const mockTransactions = [
-  {
-    id: 1,
-    date: "2024-01-15",
-    description: "Grocery Shopping",
-    category: "Food",
-    amount: -8550,
-    type: "expense",
-    method: "Card",
-  },
-  {
-    id: 2,
-    date: "2024-01-14",
-    description: "Salary",
-    category: "Salary",
-    amount: 250000,
-    type: "income",
-    method: "Bank",
-  },
-  {
-    id: 3,
-    date: "2024-01-13",
-    description: "Uber Ride",
-    category: "Transport",
-    amount: -1230,
-    type: "expense",
-    method: "M-Pesa",
-  },
-  {
-    id: 4,
-    date: "2024-01-12",
-    description: "Coffee Shop",
-    category: "Food",
-    amount: -450,
-    type: "expense",
-    method: "Cash",
-  },
-  {
-    id: 5,
-    date: "2024-01-11",
-    description: "Freelance Work",
-    category: "Income",
-    amount: 35000,
-    type: "income",
-    method: "Bank",
-  },
-]
+const getUserTransactions = (userId: string) => {
+  const userTransactions: Record<string, any[]> = {
+    "1": [
+      {
+        id: 1,
+        date: "2024-01-15",
+        description: "Grocery Shopping",
+        category: "Food",
+        amount: -8550,
+        type: "expense",
+        method: "Card",
+      },
+      {
+        id: 2,
+        date: "2024-01-14",
+        description: "Salary",
+        category: "Salary",
+        amount: 250000,
+        type: "income",
+        method: "Bank",
+      },
+      {
+        id: 3,
+        date: "2024-01-13",
+        description: "Uber Ride",
+        category: "Transport",
+        amount: -1230,
+        type: "expense",
+        method: "M-Pesa",
+      },
+      {
+        id: 4,
+        date: "2024-01-12",
+        description: "Coffee Shop",
+        category: "Food",
+        amount: -450,
+        type: "expense",
+        method: "Cash",
+      },
+      {
+        id: 5,
+        date: "2024-01-11",
+        description: "Freelance Work",
+        category: "Income",
+        amount: 35000,
+        type: "income",
+        method: "Bank",
+      },
+    ],
+  }
+
+  return userTransactions[userId] || []
+}
 
 export function TransactionsScreen() {
+  const { user } = useAuth()
   const [date, setDate] = useState<Date>()
   const [showForm, setShowForm] = useState(false)
   const [filterType, setFilterType] = useState<string>("all")
   const [filterCategory, setFilterCategory] = useState<string>("all")
+
+  const mockTransactions = getUserTransactions(user?.id || "")
 
   const filteredTransactions = mockTransactions.filter((transaction) => {
     if (filterType !== "all" && transaction.type !== filterType) return false
@@ -205,6 +215,16 @@ export function TransactionsScreen() {
           </div>
         </CardContent>
       </Card>
+
+      {mockTransactions.length === 0 && (
+        <Card className="border-0 shadow-lg">
+          <CardContent className="p-8 text-center">
+            <CreditCard className="h-12 w-12 text-gray-400 mx-auto mb-4" />
+            <h3 className="text-lg font-medium text-gray-800 mb-2">No transactions yet</h3>
+            <p className="text-gray-600 mb-4">Start by adding your first transaction above.</p>
+          </CardContent>
+        </Card>
+      )}
 
       {/* Transactions List */}
       <Card className="border-0 shadow-lg">
