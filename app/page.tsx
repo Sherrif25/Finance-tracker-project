@@ -6,6 +6,7 @@ import { DashboardScreen } from "@/components/dashboard-screen"
 import { TransactionsScreen } from "@/components/transactions-screen"
 import { GoalsScreen } from "@/components/goals-screen"
 import { Navigation } from "@/components/navigation"
+import { SMSParserScreen } from "@/components/sms-parser-screen"
 
 // Types
 interface User {
@@ -31,7 +32,7 @@ const mockUsers: Array<User & { password: string }> = [
 
 export default function PersonalFinanceApp() {
   const [user, setUser] = useState<User | null>(null)
-  const [activeScreen, setActiveScreen] = useState<"dashboard" | "transactions" | "goals">("dashboard")
+  const [activeScreen, setActiveScreen] = useState<"dashboard" | "transactions" | "goals" | "sms-parser">("dashboard")
 
   const login = async (email: string, password: string): Promise<boolean> => {
     // Simulate API call
@@ -88,6 +89,8 @@ export default function PersonalFinanceApp() {
         return <TransactionsScreen />
       case "goals":
         return <GoalsScreen />
+      case "sms-parser":
+        return <SMSParserScreen />
       default:
         return <DashboardScreen />
     }

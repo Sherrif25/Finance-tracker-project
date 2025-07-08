@@ -10,11 +10,11 @@ import {
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu"
 import { useAuth } from "@/app/page"
-import { Home, CreditCard, Target, LogOut, User, Settings } from "lucide-react"
+import { Home, CreditCard, Target, LogOut, User, Settings, MessageSquare } from "lucide-react"
 
 interface NavigationProps {
-  activeScreen: "dashboard" | "transactions" | "goals"
-  onScreenChange: (screen: "dashboard" | "transactions" | "goals") => void
+  activeScreen: "dashboard" | "transactions" | "goals" | "sms-parser"
+  onScreenChange: (screen: "dashboard" | "transactions" | "goals" | "sms-parser") => void
 }
 
 export function Navigation({ activeScreen, onScreenChange }: NavigationProps) {
@@ -24,6 +24,7 @@ export function Navigation({ activeScreen, onScreenChange }: NavigationProps) {
     { id: "dashboard", label: "Dashboard", icon: Home },
     { id: "transactions", label: "Transactions", icon: CreditCard },
     { id: "goals", label: "Goals", icon: Target },
+    { id: "sms-parser", label: "SMS Parser", icon: MessageSquare },
   ] as const
 
   const getInitials = (name: string) => {
@@ -94,13 +95,13 @@ export function Navigation({ activeScreen, onScreenChange }: NavigationProps) {
               <button
                 key={item.id}
                 onClick={() => onScreenChange(item.id)}
-                className={`flex flex-col items-center py-3 px-4 transition-colors ${
+                className={`flex flex-col items-center py-3 px-2 transition-colors ${
                   isActive
                     ? "text-blue-600 bg-blue-50 border-b-2 border-blue-600"
                     : "text-gray-600 hover:text-gray-800 hover:bg-gray-50"
                 }`}
               >
-                <Icon className={`h-5 w-5 ${isActive ? "text-blue-600" : "text-gray-600"}`} />
+                <Icon className={`h-4 w-4 ${isActive ? "text-blue-600" : "text-gray-600"}`} />
                 <span className={`text-xs mt-1 ${isActive ? "text-blue-600 font-medium" : "text-gray-600"}`}>
                   {item.label}
                 </span>
