@@ -10,21 +10,22 @@ import {
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu"
 import { useAuth } from "@/app/page"
-import { Home, CreditCard, Target, LogOut, User, Settings, MessageSquare } from "lucide-react"
+import { Home, CreditCard, Target, LogOut, User, Settings, MessageSquare, PieChart } from "lucide-react"
 
 interface NavigationProps {
-  activeScreen: "dashboard" | "transactions" | "goals" | "sms-parser"
-  onScreenChange: (screen: "dashboard" | "transactions" | "goals" | "sms-parser") => void
+  activeScreen: "dashboard" | "transactions" | "goals" | "sms-parser" | "budget"
+  onScreenChange: (screen: "dashboard" | "transactions" | "goals" | "sms-parser" | "budget") => void
 }
 
 export function Navigation({ activeScreen, onScreenChange }: NavigationProps) {
   const { user, logout } = useAuth()
 
   const navItems = [
+    { id: "budget", label: "Budget", icon: PieChart },
     { id: "dashboard", label: "Dashboard", icon: Home },
     { id: "transactions", label: "Transactions", icon: CreditCard },
     { id: "goals", label: "Goals", icon: Target },
-    { id: "sms-parser", label: "SMS Parser", icon: MessageSquare },
+    { id: "sms-parser", label: "SMS", icon: MessageSquare },
   ] as const
 
   const getInitials = (name: string) => {
@@ -86,7 +87,7 @@ export function Navigation({ activeScreen, onScreenChange }: NavigationProps) {
         </div>
 
         {/* Navigation Tabs */}
-        <div className="flex justify-around border-t border-gray-100">
+        <div className="flex justify-around border-t border-gray-100 overflow-x-auto">
           {navItems.map((item) => {
             const Icon = item.icon
             const isActive = activeScreen === item.id
@@ -95,7 +96,7 @@ export function Navigation({ activeScreen, onScreenChange }: NavigationProps) {
               <button
                 key={item.id}
                 onClick={() => onScreenChange(item.id)}
-                className={`flex flex-col items-center py-3 px-2 transition-colors ${
+                className={`flex flex-col items-center py-3 px-2 transition-colors min-w-0 flex-shrink-0 ${
                   isActive
                     ? "text-blue-600 bg-blue-50 border-b-2 border-blue-600"
                     : "text-gray-600 hover:text-gray-800 hover:bg-gray-50"
